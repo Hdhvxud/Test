@@ -1,19 +1,36 @@
 name: ScreenMirror
 options:
-  bundleIdPrefix: hdhvxud
+  bundleIdPrefix: com.hdhvxud
   deploymentTarget:
     iOS: "15.0"
 targets:
   ScreenMirror:
-    ...
+    type: application
+    platform: iOS
+    sources:
+      - ScreenMirror
     settings:
       base:
-        ...
-        PRODUCT_BUNDLE_IDENTIFIER: hdhvxud.ScreenMirror
-    ...
+        INFOPLIST_FILE: ScreenMirror/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.hdhvxud.ScreenMirror
+    entitlements:
+      path: ScreenMirror/ScreenMirror.entitlements
+    dependencies:
+      - target: ScreenCaptureExtension
+    preBuildScripts:
+      - script: |
+          echo "Embedding extension..."
+        name: Embed Extension
+        basedOnDependencyAnalysis: false
+
   ScreenCaptureExtension:
-    ...
+    type: app-extension
+    platform: iOS
+    sources:
+      - ScreenCaptureExtension
     settings:
       base:
-        ...
-        PRODUCT_BUNDLE_IDENTIFIER: hdhvxud.ScreenMirror.CaptureExtension
+        INFOPLIST_FILE: ScreenCaptureExtension/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.hdhvxud.ScreenMirror.CaptureExtension
+        CODE_SIGN_ENTITLEMENTS: ScreenCaptureExtension/Extension.entitlements
+    dependencies: []
