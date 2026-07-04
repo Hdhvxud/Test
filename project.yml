@@ -1,0 +1,19 @@
+name: ScreenMirror
+options:
+  bundleIdPrefix: hdhvxud
+  deploymentTarget:
+    iOS: "15.0"
+targets:
+  ScreenMirror:
+    ...
+    settings:
+      base:
+        ...
+        PRODUCT_BUNDLE_IDENTIFIER: hdhvxud.ScreenMirror
+    ...
+  ScreenCaptureExtension:
+    ...
+    settings:
+      base:
+        ...
+        PRODUCT_BUNDLE_IDENTIFIER: hdhvxud.ScreenMirror.CaptureExtension
